@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+</head>
+<body>
+    <h1>HOME</h1>
+    <a href="{% url 'todo_list' %}" class="btn btn-primary">ToDo</a>
+    {% load static %}
+    <div id='calendar'></div>
+    <script src="{% static 'Calendar/app.js' %}"></script>
+</body>

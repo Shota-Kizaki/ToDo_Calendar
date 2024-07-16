@@ -23,7 +23,6 @@
 ### 必要要件
 
 - Python 3.8+
-- Django 3.2+
 - その他の依存関係は `requirements.txt` に記載
 
 ### インストール手順
