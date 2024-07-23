@@ -1,2 +1,33 @@
-<h1>test</h1>
-<a href="{% url 'top' %}" class="btn btn-primary">Top</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>イベントリスト</title>
+    </head>
+    <body>
+        <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
+        <h1>イベントを追加</h1>
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="event_name" placeholder="タイトル" required>
+            <input type="date" name="start_date" required>
+            <input type="date" name="end_date" required>
+            <input type="text" name="memo" placeholder="内容" required>
+            <select name="situation" size="1" required>
+                <option value="">状況を選択してください。</option>
+                <option value="未着手">未着手</option>
+                <option value="進行中">進行中</option>
+                <option value="完了">完了</option>
+            </select>
+            <input type="submit" value="追加">
+        </form>
+        <h2>イベントリスト</h2>
+        <!-- <ul>
+            {% for event in events %}
+                <li>{{ event.event_name }} - {{ event.start_date }} - {{ event.end_date }} - {{ event.memo }} - {{ event.situation }}</li>
+            {% endfor %}
+        </ul> -->
+    </body>
+</html>
