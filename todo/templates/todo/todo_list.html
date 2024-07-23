@@ -1,10 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>イベントリスト</title>
+        <link href="{% static 'css/list.css' %}" rel="stylesheet">
     </head>
-    <body>
+    <header>
+        <h1>ToDoリスト</h1>
         <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
+        <a href="{% url 'todo_list' %}" class="btn btn-primary">追加</a>
+    </header>
+    <body>
         <h1>イベントを追加</h1>
         {% if error_message %}
             <p style="color: red;">{{ error_message }}</p>
@@ -24,10 +30,27 @@
             <input type="submit" value="追加">
         </form>
         <h2>イベントリスト</h2>
-        <!-- <ul>
-            {% for event in events %}
-                <li>{{ event.event_name }} - {{ event.start_date }} - {{ event.end_date }} - {{ event.memo }} - {{ event.situation }}</li>
-            {% endfor %}
-        </ul> -->
+        <table>
+            <thead>
+                <tr>
+                    <th>タイトル</th>
+                    <th>開始日</th>
+                    <th>終了日</th>
+                    <th>内容</th>
+                    <th>状況</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.event_name }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+                        <td>{{ event.memo }}</td>
+                        <td>{{ event.situation }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </body>
 </html>
