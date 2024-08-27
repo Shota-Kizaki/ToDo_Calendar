@@ -90,3 +90,16 @@ def todo_list_henshu(request, event_id):
         form = EventForm(instance=event)
     
     return render(request, 'todo/todo_list_henshu.html', {'form': form, 'event': event})
+def todo_narabikae(request):
+    sort_by = request.POST.get('sort', 'id')  # POSTリクエストから並び替え条件を取得。デフォルトは'id'
+    
+    if sort_by == 'start_date':
+        events = ToDo.objects.all().order_by('start_date')
+    elif sort_by == 'end_date':
+        events = ToDo.objects.all().order_by('end_date')
+    elif sort_by == 'situation':
+        events = ToDo.objects.all().order_by('situation')
+    else:
+        events = ToDo.objects.all().order_by('id')  # デフォルトは追加順（id順）
+
+    return render(request, 'todo/todo_list_shousai.html', {'events': events})

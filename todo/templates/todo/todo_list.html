@@ -1,23 +1,26 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>イベントリスト</title>
+    <title>イベントリスト 追加</title>
     <link href="{% static 'css/top.css' %}" rel="stylesheet">
-    <script src="{% static 'js/scr.js' %}" defer></script>
+    <!-- <script src="{% static 'js/scr.js' %}" defer></script> -->
 </head>
+
 <body>
     <header>
         <h1>ToDoリスト</h1>
         <div>
             <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
             <a href="{% url 'todo_list' %}" class="btn btn-primary">追加</a>
+            <a href="{% url 'todo_narabikae' %}" class="btn btn-primary">一覧</a>
         </div>
     </header>
     <div class="container">
         <h1>イベントを追加</h1>
         {% if error_message %}
-            <p style="color: red;">{{ error_message }}</p>
+        <p style="color: red;">{{ error_message }}</p>
         {% endif %}
         <form method="post">
             {% csrf_token %}
@@ -47,35 +50,28 @@
             </thead>
             <tbody>
                 {% for event in events %}
-                    <tr>
-                        <td>{{ event.event_name }}</td>
-                        <td>{{ event.start_date }}</td>
-                        <td>{{ event.end_date }}</td>
-                        <td>
-                            <span class="short-content" id="content-{{ event.id }}">
-                                {% if event.memo|length > 100 %}
-                                    {{ event.memo|slice:":100" }}...
-                                {% else %}
-                                    {{ event.memo }}
-                                {% endif %}
-                            </span>
-                        </td>
-                        <td>{{ event.situation }}</td>
-                        <td>
-                            <a href="{% url 'todo_list_henshu' event.id %}" class="btn btn-edit">詳細・編集</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ event.event_name }}</td>
+                    <td>{{ event.start_date }}</td>
+                    <td>{{ event.end_date }}</td>
+                    <td>
+                        <span class="short-content" id="content-{{ event.id }}">
+                            {% if event.memo|length > 100 %}
+                            {{ event.memo|slice:":100" }}...
+                            {% else %}
+                            {{ event.memo }}
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td>{{ event.situation }}</td>
+                    <td>
+                        <a href="{% url 'todo_list_henshu' event.id %}" class="btn btn-edit">詳細・編集</a>
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
-    <!-- モーダルウィンドウ -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="modal-text"></p>
-        </div>
-    </div>
 </body>
+
 </html>
