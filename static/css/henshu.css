@@ -1,0 +1,130 @@
+/* 全体のレイアウト */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e9ecef; /* 軽やかなグレー背景 */
+    color: #333;
+}
+
+header {
+    background-color: #6c757d; /* ソフトなグレー */
+    color: white;
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    background-color: #495057; /* 落ち着いたダークグレー */
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+header a:hover {
+    background-color: #343a40; /* ダークグレー */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #ffffff; /* 白色の背景 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* フォーム */
+.form-container {
+    margin-bottom: 1.5em;
+}
+
+form {
+    margin-bottom: 1.5em;
+}
+
+form input, form select {
+    display: block;
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ced4da; /* ソフトなグレー */
+    border-radius: 4px;
+    background-color: #f8f9fa; /* 軽やかな背景色 */
+    box-sizing: border-box;
+}
+
+form input[type="submit"] {
+    background-color: #28a745; /* 落ち着いた緑 */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #218838; /* ダークグリーン */
+}
+
+/* 削除ボタン */
+form button {
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    background-color: #dc3545; /* 赤色 */
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form button:hover {
+    background-color: #c82333; /* ダークレッド */
+}
+
+/* 元のデータ表示 */
+.original-data-container {
+    margin-top: 2em;
+}
+
+.original-data-container h3 {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.original-data-container p {
+    margin: 0.5em 0;
+    white-space: pre-wrap; /* 長い内容が改行されるようにする */
+    word-wrap: break-word; /* 単語が折り返されるようにする */
+    
+}
+
+/* モバイル対応 */
+@media screen and (max-width: 600px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    form input, form select {
+        font-size: 0.9em;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1em;
+        padding: 0.75em;
+        box-sizing: border-box;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}

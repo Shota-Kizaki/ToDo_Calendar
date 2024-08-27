@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset='utf-8' />
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    {% load static %}
+    <link href="{% static 'css/top.css' %}" rel="stylesheet">
+    <title>ToDoリスト</title>
+    <script src="{% static 'js/scr.js' %}" defer></script>
 </head>
 <body>
-    <h1>HOME</h1>
-    <a href="{% url 'todo_list' %}" class="btn btn-primary">ToDo</a>
-    <div id='calendar'></div>
-    {% load static %}
-
+    <header>
+        <h1>HOME</h1>
+        <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
+        <a href="{% url 'todo_list' %}" class="btn btn-primary">追加</a>
+    </header>
+    <div class="container">
+        <h2>締め切りが3日以内のイベント</h2>
+        
+        {% if events %}
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>イベント名</th>
+                            <th>開始日</th>
+                            <th>終了日</th>
+                            <th>内容</th>
+                            <th>状況</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                            <tr>
+                                <td>{{ event.event_name }}</td>
+                                <td>{{ event.start_date }}</td>
+                                <td>{{ event.end_date }}</td>
+                                <td>
+                                    <span class="short-content" id="content-{{ event.id }}">
+                                        {% if event.memo|length > 100 %}
+                                            {{ event.memo|slice:":100" }}...
+                                        {% else %}
+                                            {{ event.memo }}
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>{{ event.situation }}</td>
+                                <td>
+                                    <a href="{% url 'todo_list_henshu' event.id %}" class="btn btn-edit">詳細・編集</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>3日以内に締め切りのイベントはありません。</p>
+        {% endif %}
+    </div>
 </body>
+</html>

@@ -10,7 +10,8 @@ import time
 from .models import ToDo
 from .forms import EventForm
 from todo.views import todo_list
-from django.middleware.csrf import get_token
+from datetime import timedelta
+from django.utils import timezone
 
 # Create your views here.
 urlpatterns = [
@@ -19,12 +20,11 @@ urlpatterns = [
 ]
 
 def index(request):
-    # ポータルサイトのトップぺージを表示する
-    """
-    カレンダー画面
-    """
-    # CSRFのトークンを発行する
-    get_token(request)
-    # top.htmlをレンダリング
-    template = loader.get_template('login/top.html')
-    return HttpResponse(template.render())
+    # 今日の日付を取得
+    today = timezone.now().date()
+    three_days_later = today + timedelta(days=3)
+
+    # 今日から3日以内に締め切りがあるイベントをフィルタリング
+    events = ToDo.objects.filter(end_date__gte=today, end_date__lte=three_days_later)
+
+    return render(request, 'login/top.html', {'events': events})

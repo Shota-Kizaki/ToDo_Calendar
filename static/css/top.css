@@ -1,0 +1,230 @@
+/* 全体のレイアウト */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e9ecef; /* 軽やかなグレー背景 */
+    color: #333;
+}
+
+header {
+    background-color: #6c757d; /* ソフトなグレー */
+    color: white;
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    background-color: #495057; /* 落ち着いたダークグレー */
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+header a:hover {
+    background-color: #343a40; /* ダークグレー */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #ffffff; /* 白色の背景 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* フォーム */
+.form-container {
+    margin-bottom: 1.5em;
+}
+
+form {
+    margin-bottom: 1.5em;
+}
+
+form input, form select {
+    display: block;
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ced4da; /* ソフトなグレー */
+    border-radius: 4px;
+    background-color: #f8f9fa; /* 軽やかな背景色 */
+    box-sizing: border-box;
+}
+
+form input[type="submit"] {
+    background-color: #28a745; /* 落ち着いた緑 */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #218838; /* ダークグリーン */
+}
+
+/* 削除ボタン */
+form button {
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    background-color: #dc3545; /* 赤色 */
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form button:hover {
+    background-color: #c82333; /* ダークレッド */
+}
+
+/* 元のデータ表示 */
+.original-data-container {
+    margin-top: 2em;
+}
+
+.original-data-container h3 {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.original-data-container p {
+    margin: 0.5em 0;
+}
+
+/* テーブルのスタイル */
+.table-container {
+    overflow: hidden; /* スクロールバーを表示しない */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+    table-layout: fixed; /* テーブルのレイアウトを固定して、セル内で改行されるようにする */
+}
+
+th, td {
+    padding: 0.75em;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* ソフトなグレー */
+    word-wrap: break-word; /* 長い単語やURLがセル内で折り返される */
+    overflow-wrap: break-word; /* 長い単語やURLがセル内で折り返される */
+    position: relative; /* 詳細ボタンの位置を調整するために relative にする */
+}
+
+th {
+    background-color: #f1f3f5; /* 軽やかなグレー */
+    color: #495057; /* ダークグレー */
+}
+
+td {
+    background-color: #ffffff; /* 白色の背景 */
+    overflow: hidden; /* セル内でのオーバーフローを隠す */
+}
+
+tr:hover {
+    background-color: #e9ecef; /* 軽やかなグレー */
+}
+
+/* 詳細ボタンのスタイル */
+.details-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.3em 0.6em;
+    font-size: 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 0.5em;
+}
+
+.details-button:hover {
+    background-color: #0056b3;
+}
+
+/* 詳細表示部分のスタイル */
+.details-content {
+    display: none;
+    padding-top: 0.5em;
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    word-wrap: break-word; /* 長い単語やURLがセル内で折り返される */
+}
+
+.details-content p {
+    margin: 0.5em 0;
+}
+
+/* モーダルのスタイル */
+.modal {
+    display: none; /* 初期状態では非表示 */
+    position: fixed; /* スクロールしても画面の同じ位置に固定 */
+    z-index: 1; /* 他の要素の上に表示 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全画面幅 */
+    height: 100%; /* 全画面高さ */
+    overflow: auto; /* 内容が多い場合にスクロールできるように */
+    background-color: rgb(0,0,0); /* 黒い背景 */
+    background-color: rgba(0,0,0,0.4); /* 透明度のある背景 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* モーダルを画面の中央に配置 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* モーダルの幅を設定 */
+    max-width: 800px; /* 最大幅を設定 */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* モバイル対応 */
+@media screen and (max-width: 600px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    form input, form select {
+        font-size: 0.9em;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1em;
+        padding: 0.75em;
+        box-sizing: border-box;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}

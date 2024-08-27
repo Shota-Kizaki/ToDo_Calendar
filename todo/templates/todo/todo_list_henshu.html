@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>イベントリスト</title>
+        <link href="{% static 'css/henshu.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>ToDoリスト 詳細・編集</h1>
+            <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
+            <a href="{% url 'todo_list' %}" class="btn btn-primary">追加</a>
+        </header>
+
+        <div class="container">
+            <!-- フォーム部分 -->
+            <div class="form-container">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name="event_name" placeholder="タイトル" value="{{ form.event_name.value }}" required>
+                    <input type="date" name="start_date" value="{{ form.start_date.value }}" required>
+                    <input type="date" name="end_date" value="{{ form.end_date.value }}" required>
+                    <input type="text" name="memo" placeholder="内容" value="{{ form.memo.value }}" required>
+                    <select name="situation" size="1" required>
+                        <option value="">状況を選択してください。</option>
+                        <option value="未着手" {% if form.situation.value == "未着手" %}selected{% endif %}>未着手</option>
+                        <option value="進行中" {% if form.situation.value == "進行中" %}selected{% endif %}>進行中</option>
+                        <option value="完了" {% if form.situation.value == "完了" %}selected{% endif %}>完了</option>
+                    </select>
+                    <input type="submit" value="更新">
+                </form>
+                
+                <!-- 削除専用フォーム -->
+                <form method="post" style="margin-top: 10px;">
+                    {% csrf_token %}
+                    <button type="submit" name="delete" onclick="return confirm('本当に削除しますか？');">削除</button>
+                </form>               
+            <!-- 元のデータ表示部分 -->
+            <div class="original-data-container">
+                <h3>元のデータ</h3>
+                <p><strong>タイトル:</strong> {{ event.event_name }}</p>
+                <p><strong>開始日:</strong> {{ event.start_date }}</p>
+                <p><strong>終了日:</strong> {{ event.end_date }}</p>
+                <p><strong>内容:</strong> {{ event.memo }}</p>
+                <p><strong>状況:</strong> {{ event.situation }}</p>
+            </div>
+        </div>
+    </body>
+</html>

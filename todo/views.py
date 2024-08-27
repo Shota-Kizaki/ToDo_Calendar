@@ -1,11 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from top.models import ToDo
-from django.http import HttpResponse, Http404
-from django.shortcuts import redirect
 from top.forms import EventForm
 from datetime import datetime
 import logging
-
 # ロガーの設定
 logger = logging.getLogger(__name__)
 
@@ -54,3 +51,42 @@ def todo_list(request):
 
     events = ToDo.objects.all().order_by('start_date')
     return render(request, 'todo/todo_list.html', {'events': events})
+
+def todo_list_henshu(request, event_id):
+    event = get_object_or_404(ToDo, id=event_id)
+    
+    if request.method == 'POST':
+        if 'delete' in request.POST:  # 'delete' ボタンが押された場合
+            try:
+                event.delete()
+                logger.debug(f"Event with ID {event_id} deleted successfully")
+                return redirect('todo_list')
+            except Exception as e:
+                logger.error(f"Error deleting event: {e}")
+                return render(request, 'todo/todo_list_henshu.html', {
+                    'form': None,
+                    'event': event,
+                    'error_message': f'エラー: {str(e)}',
+                })
+        else:
+            form = EventForm(request.POST, instance=event)
+            
+            # ログを追加してPOSTデータを確認
+            logger.debug(f"Received POST data for editing: {request.POST}")
+            
+            if form.is_valid():
+                try:
+                    form.save()
+                    logger.debug("Event updated successfully")
+                    return redirect('todo_list')
+                except Exception as e:
+                    logger.error(f"Error updating event: {e}")
+                    return render(request, 'todo/todo_list_henshu.html', {
+                        'form': form,
+                        'event': event,
+                        'error_message': f'エラー: {str(e)}',
+                    })
+    else:
+        form = EventForm(instance=event)
+    
+    return render(request, 'todo/todo_list_henshu.html', {'form': form, 'event': event})
