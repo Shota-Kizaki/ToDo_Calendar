@@ -9,7 +9,7 @@
 - [使い方](#使い方)
 - [必要要件](#必要要件)
 - [インストール手順](#インストール手順)
-- [ライセンス](#ライセンス)
+<!-- - [ライセンス](#ライセンス) -->
 
 ## 機能
 
@@ -32,12 +32,12 @@
 
    ```bash
    git clone https://github.com/Shota-Kizaki/ToDo_Calendar.git
-   cd ToDo_Calendar
    ```
 
 2. 仮想環境を整えます。
 
    ```bash
+   cd ToDo_Calendar
    python -m venv .venv
    .venv\Scripts\activate 
    pip install -r requirements.txt
