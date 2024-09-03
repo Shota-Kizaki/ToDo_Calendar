@@ -8,9 +8,11 @@
     <body>
         <header>
             <h1>ToDoリスト 詳細・編集</h1>
-            <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
-            <a href="{% url 'todo_list' %}" class="btn btn-primary">追加</a>
-            <a href="{% url 'todo_narabikae' %}" class="btn btn-primary">一覧</a>
+            <div>
+                <a href="{% url 'index' %}" class="btn btn-primary">Top</a>
+                <a href="{% url 'todo_list' %}" class="btn btn-primary">追加</a>
+                <a href="{% url 'todo_narabikae' %}" class="btn btn-primary">一覧</a>
+            </div>
         </header>
         <div class="container">
             <!-- フォーム部分 -->
